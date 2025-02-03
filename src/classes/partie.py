@@ -13,7 +13,6 @@ class Partie :
     """
     Partie de jeu Hit!
     """
-
     def __init__ (self, joueurs : list[Joueur]) -> None :
         self.joueurs : list[Joueur] = joueurs
         self.paquet : Paquet = Paquet()
@@ -29,15 +28,14 @@ class Partie :
             self.tour_de_jeu()
             self.joueur_courant = self.joueurs[(self.joueurs.index(self.joueur_courant) + 1) % 4]
 
-
     def tour_de_jeu (self) -> None :
         """
         Simule le tour de jeu d'un joueur
         """
-        probabilite : float = 0.80
         self.joueur_courant.sauvegarder_cartes()
         while True :
-            if rd.random() < probabilite or len(self.joueur_courant.carte_en_cours) < 3 :
+            if rd.random() < self.joueur_courant.audace or \
+                len(self.joueur_courant.carte_en_cours) < 3 :
                 carte : Carte = self.paquet.cartes.pop()
                 self.joueur_courant.carte_en_cours.append(carte)
                 print(f"Joueur {self.joueur_courant.nom} pioche une carte : {carte}")
@@ -46,13 +44,26 @@ class Partie :
                     self.joueur_courant.carte_en_cours = []
                     print(f"Joueur {self.joueur_courant.nom} a perdu ses carte(s) !")
                     return None
+                if rd.random() < self.joueur_courant.attention :
+                    # implémenter vol
+                    self.vol_de_carte(carte)
                 self.test_fin_de_partie()
             else :
                 print(f"Joueur {self.joueur_courant.nom} s'arrete")
-                # for carte in joueur.carte_en_cours :
-                #     print(carte)
-                # joueur.sauvegarder_cartes()
                 return None
+
+    def vol_de_carte (self, nouvelle_carte : Carte) -> None :
+        """
+        Permet à un joueur de voler les cartes des autres joueurs
+        """
+        for joueur in self.joueurs :
+            if joueur != self.joueur_courant :
+                for carte in joueur.carte_en_cours :
+                    if carte == nouvelle_carte :
+                        joueur.carte_en_cours.remove(carte)
+                        self.joueur_courant.carte_en_cours.append(carte)
+                        print(f"Le joueur {self.joueur_courant.nom} vole \
+une carte {carte.get_valeur()} au joueur {joueur.nom}")
 
     def test_fin_de_partie (self) -> None :
         """

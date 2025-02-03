@@ -2,6 +2,8 @@
 Classe représentant un joueur
 """
 
+import random as rd
+
 from classes.carte import Carte
 
 class Joueur :
@@ -9,14 +11,22 @@ class Joueur :
     Joueur du jeu Hit!
     """
 
-    def __init__ (self, nom : str) -> None :
+    def __init__ (self, nom : str, audace : float = None, attention : float = None) -> None :
         self.nom :  str = nom
         self.score : int = 0
+        if audace is None :
+            self.audace : float = round(rd.random(), 2)
+        else :
+            self.audace = audace
+        if attention is None :
+            self.attention : float = round(rd.random(), 2)
+        else :
+            self.attention = attention
         self.carte_en_cours : list[Carte]= []
         self.cartes_sauvegardees : list[Carte] = []
 
     def __str__ (self) -> str :
-        return f"Joueur {self.nom} (score : {self.score})"
+        return f"Joueur {self.nom} (score : {self.score}) [{self.audace}, {self.attention}]"
 
     def __lt__ (self, autre) -> bool :
         if self.score < autre.score :

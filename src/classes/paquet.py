@@ -10,7 +10,6 @@ class Paquet :
     """
     Paquet de carte du jeu Hit!
     """
-
     def __init__ (self) -> None :
         self.cartes : list[Carte] = []
         nombre_occurrence = 11
@@ -19,11 +18,7 @@ class Paquet :
                 self.cartes.append(Carte(valeur))
             if valeur == 5 :
                 nombre_occurrence = 7
-        # print(len(self.cartes))
-        # for carte in self.cartes : print(carte)
         self.melenger_paquet()
-        # print(len(self.cartes))
-        # for carte in self.cartes : print(carte)
 
     def melenger_paquet (self) -> None :
         """
