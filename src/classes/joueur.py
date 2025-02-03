@@ -33,6 +33,9 @@ class Joueur :
             self.score += carte.get_valeur()
             self.cartes_sauvegardees.append(carte)
         self.carte_en_cours = []
-        print(f"Le joueur {self.nom} a sauvegardé {nombre_cartes}\
-              cartes pour une valeur de {self.score - score_actuel}.\n\
-              Son score s'éléve maintenant à {self.score}")
+        if nombre_cartes == 0 :
+            print(f"Le joueur {self.nom} n'a pas de cartes à sauvegarder")
+        else :
+            print(f"Le joueur {self.nom} a sauvegardé {nombre_cartes} carte(s) \
+pour une valeur de {self.score - score_actuel} points.\n\
+Son score s'éléve maintenant à {self.score}")

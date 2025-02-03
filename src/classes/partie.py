@@ -17,27 +17,42 @@ class Partie :
     def __init__ (self, joueurs : list[Joueur]) -> None :
         self.joueurs : list[Joueur] = joueurs
         self.paquet : Paquet = Paquet()
+        self.joueur_courant : Joueur = None
 
     def demarrer_partie (self) :
         """
         Démarre la partie
         """
-        joueur_courant : Joueur = rd.choices(self.joueurs)[0]
-        print(joueur_courant)
+        self.joueur_courant = rd.choices(self.joueurs)[0]
         while True :
-            print(f"Tour de jeu de {joueur_courant.nom}")
-            self.tour_de_jeu(joueur_courant)
-            print(self.joueurs.index(joueur_courant), self.joueurs.index(joueur_courant) + 1)
-            joueur_courant = self.joueurs[(self.joueurs.index(joueur_courant) + 1) % 4]
+            print(f"Tour de jeu de {self.joueur_courant.nom}")
+            self.tour_de_jeu()
+            self.joueur_courant = self.joueurs[(self.joueurs.index(self.joueur_courant) + 1) % 4]
 
 
-    def tour_de_jeu (self, joueur : Joueur) -> None :
+    def tour_de_jeu (self) -> None :
         """
         Simule le tour de jeu d'un joueur
         """
-        carte : Carte = self.paquet.cartes.pop()
-        joueur.carte_en_cours.append(carte)
-        self.test_fin_de_partie()
+        probabilite : float = 0.80
+        self.joueur_courant.sauvegarder_cartes()
+        while True :
+            if rd.random() < probabilite or len(self.joueur_courant.carte_en_cours) < 3 :
+                carte : Carte = self.paquet.cartes.pop()
+                self.joueur_courant.carte_en_cours.append(carte)
+                print(f"Joueur {self.joueur_courant.nom} pioche une carte : {carte}")
+                if len(self.joueur_courant.carte_en_cours) > 3 and \
+                    carte in self.joueur_courant.carte_en_cours[:-1] :
+                    self.joueur_courant.carte_en_cours = []
+                    print(f"Joueur {self.joueur_courant.nom} a perdu ses carte(s) !")
+                    return None
+                self.test_fin_de_partie()
+            else :
+                print(f"Joueur {self.joueur_courant.nom} s'arrete")
+                # for carte in joueur.carte_en_cours :
+                #     print(carte)
+                # joueur.sauvegarder_cartes()
+                return None
 
     def test_fin_de_partie (self) -> None :
         """
@@ -50,6 +65,7 @@ class Partie :
         """
         Termine la partie lorsque le paquet est épuisé
         """
+        self.joueur_courant.sauvegarder_cartes()
         self.joueurs.sort()
         gagnant : Joueur = self.joueurs[-1]
         for joueur in self.joueurs :

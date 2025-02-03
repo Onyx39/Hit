@@ -13,6 +13,11 @@ class Carte :
     def __str__ (self) -> str :
         return f"Carte {self.valeur}"
 
+    def __eq__ (self, autre) -> bool :
+        if self.get_valeur() == autre.get_valeur() :
+            return True
+        return False
+
     def get_valeur (self) -> int :
         """
         Permet de récupérer la valeur d'une carte
