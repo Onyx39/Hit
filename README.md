@@ -1,2 +1,2 @@
-# Hit-
-Simulation du jeu de carte Hit!
+# Hit !
+Simulation du jeu de carte Hit! en Python
