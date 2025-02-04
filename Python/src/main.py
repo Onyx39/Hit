@@ -2,11 +2,8 @@
 Fichier exécutable, permet de simuler le jeu
 """
 
-from classes.paquet import Paquet
 from classes.joueur import Joueur
 from classes.partie import Partie
-
-paquet : Paquet = Paquet()
 
 J1 : Joueur = Joueur("J1", attention=1)
 J2 : Joueur = Joueur("J2", attention=1)

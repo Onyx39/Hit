@@ -26,7 +26,8 @@ class Partie :
         while True :
             print(f"Tour de jeu de {self.joueur_courant.nom}")
             self.tour_de_jeu()
-            self.joueur_courant = self.joueurs[(self.joueurs.index(self.joueur_courant) + 1) % 4]
+            index : int = (self.joueurs.index(self.joueur_courant) + 1) % len(self.joueurs)
+            self.joueur_courant = self.joueurs[index]
 
     def tour_de_jeu (self) -> None :
         """
@@ -45,7 +46,6 @@ class Partie :
                     print(f"Joueur {self.joueur_courant.nom} a perdu ses carte(s) !")
                     return None
                 if rd.random() < self.joueur_courant.attention :
-                    # implémenter vol
                     self.vol_de_carte(carte)
                 self.test_fin_de_partie()
             else :
