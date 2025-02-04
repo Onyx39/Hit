@@ -1,4 +1,4 @@
-package src.classes;
+package hit;
 public class Carte {
 
     private int valeur;

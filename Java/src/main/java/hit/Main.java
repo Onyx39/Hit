@@ -1,8 +1,5 @@
-package src;
+package hit;
 import java.util.ArrayList;
-
-import src.classes.Joueur;
-import src.classes.Partie;
 
 public class Main {
     public static void main(String[] args) {

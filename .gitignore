@@ -1,1 +1,6 @@
+# Version python
 **/__pycache__/
+
+# Version Java
+**/.gradle/
+**/build/

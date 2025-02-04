@@ -1,4 +1,4 @@
-package src.classes;
+package hit;
 import java.util.ArrayList;
 
 public class Joueur implements Comparable<Joueur> {
