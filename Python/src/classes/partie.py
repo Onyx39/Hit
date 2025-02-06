@@ -18,7 +18,7 @@ class Partie :
         self.paquet : Paquet = Paquet()
         self.joueur_courant : Joueur = None
 
-    def demarrer_partie (self) :
+    def demarrer_partie (self) -> None :
         """
         Démarre la partie
         """
@@ -60,9 +60,9 @@ class Partie :
             if joueur != self.joueur_courant :
                 for carte in joueur.carte_en_cours :
                     if carte == nouvelle_carte :
-                        joueur.carte_en_cours.remove(carte)
-                        self.joueur_courant.carte_en_cours.append(carte)
-                        print(f"Le joueur {self.joueur_courant.nom} vole \
+                            joueur.carte_en_cours.remove(carte)
+                            self.joueur_courant.carte_en_cours.append(carte)
+                            print(f"Le joueur {self.joueur_courant.nom} vole \
 une carte {carte.get_valeur()} au joueur {joueur.nom}")
 
     def test_fin_de_partie (self) -> None :

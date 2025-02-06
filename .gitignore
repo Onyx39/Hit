@@ -4,3 +4,9 @@
 # Version Java
 **/.gradle/
 **/build/
+
+# Vercion C/C++
+*.exe
+
+# VSCode
+**/.vscode/
