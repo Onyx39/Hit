@@ -38,7 +38,7 @@ public:
 
     // Surcharge de l'opérateur != pour comparer deux objets Joueur
     bool operator!=(const Joueur& autre) const {
-        return nom != autre.nom;
+        return !(*this == autre);
     }
 
     // Surcharge de l'opérateur ==

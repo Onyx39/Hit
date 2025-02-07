@@ -24,7 +24,7 @@ public:
 private:
     Paquet paquet;
     std::vector<Joueur> joueurs;
-    Joueur joueurCourant;
+    Joueur& joueurCourant;
 };
 
 #endif

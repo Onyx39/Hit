@@ -27,7 +27,9 @@ void Partie::tourDeJeu() {
         if ((float)rand() / (float)RAND_MAX < joueurCourant.getAudace() || joueurCourant.cartesEnCours.size() < 3) {
                 // Piocher une carte du paquet
                 Carte carte = paquet.piocherCarte();
+                std::cout << "XXYNombre de cartes : " << joueurCourant.cartesEnCours.size() << std::endl;
                 joueurCourant.cartesEnCours.push_back(carte);  // Ajouter la carte à la main du joueur
+                std::cout << "XXZNombre de cartes : " << joueurCourant.cartesEnCours.size() << std::endl;
                 std::cout << "Joueur " << joueurCourant.getNom() << " pioche une carte : " << carte.getValeur() << std::endl;
 
                 // Vérifier si le joueur a plus de 3 cartes et si une carte est doublée
@@ -54,12 +56,24 @@ void Partie::tourDeJeu() {
 
 void Partie::volDeCarte(Carte nouvelleCarte) {
     std::cout << "FONCTION VOLDECARTE" << std::endl;
-    for (Joueur joueur : joueurs) {
+
+    
+    std::cout << "Affichage de joueurCourant : " << joueurCourant.getNom() << ", " << std::to_string(joueurCourant.getScore()) << std::endl;
+
+    for (Joueur& joueur : joueurs) {
+        std::cout << "Affichage du joueur : " << joueur.getNom() << ", " << std::to_string(joueur.getScore()) << std::endl;
+        std::cout << "Affichage du joueur BIS: " << joueur << std::endl;
+        std::cout << "Affichage du joueurCourant BIS: " << joueurCourant << std::endl;
+        std::cout << "glagla " << joueur << " - " << joueurCourant << " : " << std::to_string(joueur != joueurCourant) << std::endl;
         if (joueur != joueurCourant) {
+            std::cout << "Passage du col ! (" << joueur << ")" << std::endl;
+            std::cout << "Nombre de cartes : " << joueur.cartesEnCours.size() << std::endl;
+            std::cout << "Nouvelle carte : " << nouvelleCarte << std::endl;
+
             for (Carte carte : joueur.cartesEnCours) {
-                std::cout << carte << " " << nouvelleCarte << std::endl;
+                std::cout << "volle " << carte << " " << nouvelleCarte << std::endl;
                 if (carte == nouvelleCarte) {
-                    std::cout << "VOL POSSIBLE !!! (" << carte << ")" << std::endl;
+                    std::cout << "VOL POSSIBLE !!! (" << carte << " - " << nouvelleCarte << ")" << std::endl;
                     for (auto it = joueur.cartesEnCours.begin(); it != joueur.cartesEnCours.end(); ++it) {
                         if (*it == carte) {
                             joueur.cartesEnCours.erase(it);

@@ -10,7 +10,7 @@ public:
 
     std::string toString() const;  // Méthode pour afficher la carte
 
-    bool operator==(const Carte& autre) const;  // Comparaison de cartes
+    bool operator==(const Carte autre) const;  // Comparaison de cartes
 
     int getValeur() const;  // Retourne la valeur de la carte
 

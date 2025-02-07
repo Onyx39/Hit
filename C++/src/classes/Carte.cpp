@@ -7,8 +7,8 @@ std::string Carte::toString() const {
     return "Carte " + std::to_string(valeur);
 }
 
-bool Carte::operator==(const Carte& autre) const {
-    return this->valeur == autre.valeur;
+bool Carte::operator==(const Carte autre) const {
+    return valeur == autre.valeur;
 }
 
 int Carte::getValeur() const {
