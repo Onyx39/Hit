@@ -5,6 +5,8 @@
 #include "classes/Joueur.h"
 #include "classes/Partie.h"
 
+#include "../test/testCarte.h"
+
 int main() {
     // Carte carte1(5);
     // Carte carte2(5);
@@ -16,6 +18,8 @@ int main() {
 
     // Paquet paquet;
     // std::cout << paquet.getNombreCartePioche() << std::endl; 
+
+    testCarte();
 
     Joueur J1("J1");
     Joueur J2("J2");
